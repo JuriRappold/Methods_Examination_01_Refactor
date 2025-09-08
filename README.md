@@ -1,5 +1,5 @@
 # Methods_Examination_01_Refactor
-**Course:** Methods for Sustainable Programming
+**Course:** Methods for Sustainable Programming <br>
 **Project:**
 ## 5.) Refactor already existing project(s) to use Functional Programming
 1. Research and present at least three concepts from Functional Programming
@@ -11,3 +11,5 @@
 2. Highlight differences and similarities between the two paradigms
 3. Implement example(s) to illustrate the differences in how the same problem would be solved using the two paradigms
 4. Point out what concepts from Functional Programming was used in the code example and explain them
+## Steps
+1. Decide on which Task 3 program (Gunnar/Milly/Juri)
