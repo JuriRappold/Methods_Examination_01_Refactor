@@ -13,7 +13,7 @@
 4. Point out what concepts from Functional Programming was used in the code example and explain them
 
 ## Steps
-1. Decide on which Task 1 program (Gunnar/Milly/Juri)
+1. Decide on which Task 1 program (Gunnar/Milly/Juri) <br>
 Tic Tac Toe - Gunnar/Juri <br>
 Dice - Milly <br>
 Rock paper scissors - Juri <br>
