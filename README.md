@@ -14,9 +14,9 @@
 
 ## Steps
 1. Decide on which Task 1 program (Gunnar/Milly/Juri)
-Tic Tac Toe - *name* <br>
-Dice - *name* <br>
-Rock paper scissors - *name* <br>
-Avatar - *name* <br>
-Menu - *name* <br>
-Today - *name* <br>
+Tic Tac Toe - Gunnar/Juri <br>
+Dice - Milly <br>
+Rock paper scissors - Juri <br>
+Avatar - Juri <br>
+Menu - Gunnar <br>
+Today - Milly <br>
