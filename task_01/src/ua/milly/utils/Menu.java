@@ -2,6 +2,7 @@ package ua.milly.utils;
 import java.util.Scanner;
 import ua.milly.games.DiceGame21;
 import ua.milly.games.RockPaperScissor;
+import ua.milly.games.GameRock;
 
 public class Menu {
     final static private Scanner input = new Scanner(System.in);
@@ -28,6 +29,10 @@ public class Menu {
                 case "3b":
                     DiceGame21 game2 = new DiceGame21();
                     game2.play();
+                    break;
+                case "4":
+                    GameRock game3 = new GameRock();
+                    game3.play();
                     break;
                 case "m":
                     printMenu();
