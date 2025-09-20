@@ -1,7 +1,7 @@
-package utils;
+package ua.milly.utils;
 import java.util.Scanner;
-import games.DiceGame21;
-import games.RockPaperScissor;
+import ua.milly.games.DiceGame21;
+import ua.milly.games.RockPaperScissor;
 
 public class Menu {
     final static private Scanner input = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class Menu {
                 case "0":
                     Avatar.setAvatar();
                 case "1":
-                    Avatar.print(Avatar.AvatarName);
+                    Avatar.getASCII_Art(Avatar.AvatarName);
                     break;
                 case "2":
                     Today.print();

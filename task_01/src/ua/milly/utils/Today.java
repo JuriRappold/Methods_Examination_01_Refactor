@@ -1,4 +1,4 @@
-package utils;
+package ua.milly.utils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
