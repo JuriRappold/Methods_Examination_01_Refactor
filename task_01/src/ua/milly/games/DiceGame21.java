@@ -1,5 +1,5 @@
-package games;
-import utils.Avatar;
+package ua.milly.games;
+import ua.milly.utils.Avatar;
 import java.util.Scanner;
 import java.util.Random;
 
