@@ -17,8 +17,4 @@
 Tic Tac Toe - Gunnar/Juri <br>
 Dice - Milly <br>
 Rock paper scissors - Juri <br>
-Avatar - Juri <br>
 Menu - Gunnar <br>
-Today - Milly <br>
-
-## Trying to solve some git issues
