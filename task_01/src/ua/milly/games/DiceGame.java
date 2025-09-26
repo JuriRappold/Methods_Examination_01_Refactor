@@ -15,54 +15,40 @@ public class DiceGame {
         System.out.println(instructions);
     }
     
-    public void PlayGame(){
-        int sumFriend = 0, sumPlayer = 0;
-
-    //Choosing who will play first
+    public void Start(){
+        EnterEater();;
+        //Start the game
+        GameState endvalues = RunGame(new GameState(0,0));
+        //Show who won!
+        System.out.println(WinnerEvaluation.apply(endvalues.sumFriend(),endvalues.sumPlayer()));
+        //repeat the game?
+        EndOfGame(endvalues.sumFriend(),endvalues.sumPlayer());
+        if(UserYes.getAsBoolean())Start();
+    }
+        private GameState RunGame(GameState state){
+        //Choosing who will play first
         //text for it
         System.out.println(whoIsFirst);
         //if Friend first, play
         if(IsFriendFirst.get()){
-            sumFriend = FriendPlay(0);
+            int sumFriend = FriendPlay(0);
             //did Friend win?
-            if (gaming.test(sumPlayer,sumFriend)){
-                //if yes, show the result + ask user to repeat the game 
-                
-                if(UserYes.getAsBoolean())PlayGame();
-                //if he ddn't...
+            if (gaming.test(state.sumPlayer(),sumFriend)) return new GameState(state.sumPlayer(), sumFriend);
                 else {
                     //he plays
-                    sumPlayer = PlayerPlay(0, true);
-                    EndOfGame(sumPlayer, sumFriend);
-                    if(UserYes.getAsBoolean())PlayGame();
-                    System.out.println("What?");
-                    return;
-
+                    int sumPlayer = PlayerPlay(0, true);
+                    return new GameState(sumPlayer, sumFriend);
                 }
         }
         else {
-        sumPlayer = PlayerPlay(0, true);
-            if (gaming.test(sumPlayer,sumFriend)){
-                EndOfGame(sumPlayer, sumFriend);
-                if(UserYes.getAsBoolean())PlayGame();
-                else {
-                    sumFriend = FriendPlay(0);
-                    EndOfGame(sumPlayer, sumFriend);
-                    if(UserYes.getAsBoolean())PlayGame();
-                    System.out.println("What?");
-                    return;
-                }
-            }
+            int sumPlayer = PlayerPlay(0, true);
+            if (gaming.test(state.sumPlayer(),0)) return new GameState(state.sumPlayer(), 0);
+            else return new GameState(sumPlayer, FriendPlay(0));       
         }
     }
 
 
-
-    }
-    
-
         private void EndOfGame(int sumPlayer, int sumFriend) {
-        System.out.println(IsFriendWinning.apply(sumPlayer, sumFriend));
         System.out.print("\nPlay once more? [Y/N]");
         }
 
@@ -102,31 +88,28 @@ public class DiceGame {
 
     //player's turn
     private int PlayerPlay(int sum, boolean playing){
-        if (!playing || sum >= 21) return sum;
-        else{
-            int roll = Roll6.get();
-            System.out.printf("You rolled %s(%d). The sum is %d. Roll once more [Y/N]?", diceGraphics[roll-1],roll, sum+roll);
-            return PlayerPlay(sum + roll, UserYes.getAsBoolean());
-        }
-
+        if (!playing) return sum;
+        int roll = Roll6.get();
+        System.out.printf("You rolled %s(%d). The sum is %d.\n", diceGraphics[roll-1],roll, sum+roll);
+        if (!playing || sum+roll >= 21) return sum+roll;
+        System.out.printf("Roll once more [Y/N]?");
+        return PlayerPlay(sum + roll, UserYes.getAsBoolean());
     }
 
-    //other
     private static final BiPredicate<Integer,Integer> gaming = (Integer sumPlayer, Integer sumFriend) -> sumPlayer >= 21 || sumFriend >= 21;
 
-    private static final BiFunction<Integer,Integer,String> IsFriendWinning = (Integer sumPlayer, Integer sumFriend) -> { 
-        if (sumPlayer == 21 || sumPlayer > sumFriend){
-            return "Player wins!!!🎉";
-        }
-        else if (sumFriend == 21 || sumFriend > sumPlayer){
-            return "Dino wins🎉🎉🎉";
-        }
-        else {
-            return "Tie🤷‍♂️";
-        }};
+    private static final BiFunction<Integer,Integer,String> WinnerEvaluation = (Integer sumPlayer, Integer sumFriend) -> { 
+        System.out.printf("TEST IN WINNER EVALUATION: %d %d",sumPlayer,sumFriend);
+        if ((sumPlayer <22 && sumPlayer > sumFriend)||((21-sumPlayer > 21-sumFriend)&&(sumPlayer != 21 || sumFriend != 21)))    return"\nPlayer wins!!!🎉";
+        else if (sumFriend <22 && sumFriend > sumPlayer ||((21-sumPlayer < 21-sumFriend)&&(sumPlayer != 21 || sumFriend != 21)))return "\nDino wins🎉🎉🎉";
+        else if (sumFriend==sumPlayer)                                                                                          return "Tie🤷‍♂️";
+        else                                                                                                                    return "Don't do gambling, kids!";
+        };
 
-
-    private static final BooleanSupplier UserYes = () -> Character.toLowerCase(input.next().charAt(0))=='y'; //input.nextLine().toLowerCase().equals("y")
+    private static final BooleanSupplier UserYes = () -> Character.toLowerCase(input.next().charAt(0))=='y';
+    private static final void EnterEater() {
+        if (input.hasNextLine()) input.nextLine();
+    };
 
 
     //texts
@@ -140,7 +123,6 @@ public class DiceGame {
             ---------------------------
             G O O D            L U C K
             """;
-    
     
     private static final String whoIsFirst = "Choosing who will play first. Rolling the die..";
 }
