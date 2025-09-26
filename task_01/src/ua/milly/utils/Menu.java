@@ -1,4 +1,4 @@
-package utils;
+package ua.milly.utils;
 import java.util.Scanner;
 import java.util.Map;
 import games.DiceGame21;
@@ -9,7 +9,6 @@ public class Menu {
     private final static Scanner input = new Scanner(System.in);
     public void run(){ 
         Avatar.AvatarName = "Small dino";
-
         Map<String, Runnable> actions = Map.of(
 
             "0", () -> Avatar.setAvatar(),

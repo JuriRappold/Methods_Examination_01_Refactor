@@ -1,4 +1,4 @@
-package games;
+package ua.milly.games;
 import java.util.Random;
 
 public class Dice {
