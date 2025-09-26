@@ -1,4 +1,4 @@
-package games;
+package ua.milly.games;
 
 import java.util.ArrayList;
 import java.util.Arrays;

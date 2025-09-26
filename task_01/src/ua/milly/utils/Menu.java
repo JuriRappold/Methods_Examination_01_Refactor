@@ -1,9 +1,9 @@
 package ua.milly.utils;
 import java.util.Scanner;
 import java.util.Map;
-import games.DiceGame21;
-import games.RockPaperScissor;
-import games.TicTacToe;
+import ua.milly.games.DiceGame;
+import ua.milly.games.TicTacToe;
+import ua.milly.games.GameRock;
 
 public class Menu {
     private final static Scanner input = new Scanner(System.in);
@@ -12,10 +12,10 @@ public class Menu {
         Map<String, Runnable> actions = Map.of(
 
             "0", () -> Avatar.setAvatar(),
-            "1", () -> Avatar.print(Avatar.AvatarName),
+            "1", () -> Avatar.getASCII_Art(Avatar.AvatarName),
             "2", Today::print,
-            "3a", () -> new RockPaperScissor().play(),
-            "3b", () -> new DiceGame21().play(),
+            "3a", () -> new GameRock().play(),
+            "3b", () -> {System.out.println("Press enter to start.");new DiceGame().Start();},
             "3c", () -> new TicTacToe().play(),
             "m", this::printMenu,
             "q", () -> System.out.println("Quitting...")

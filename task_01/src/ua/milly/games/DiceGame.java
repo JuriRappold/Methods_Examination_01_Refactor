@@ -1,6 +1,5 @@
-package games;
-
-import utils.Avatar;
+package ua.milly.games;
+import ua.milly.utils.Avatar;
 import java.util.Scanner;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
@@ -10,17 +9,12 @@ import java.util.function.Supplier;
 
 public class DiceGame {
     
-    public void Rules(){
-        //explain of rules
-        System.out.println(instructions);
-    }
-    
     public void Start(){
-        EnterEater();;
-        //Start the game
+        EnterEater();        //Start the game
+        System.out.println(instructions);
         GameState endvalues = RunGame(new GameState(0,0));
         //Show who won!
-        System.out.println(WinnerEvaluation.apply(endvalues.sumFriend(),endvalues.sumPlayer()));
+        System.out.printf(WinnerEvaluation.apply(endvalues.sumFriend(),endvalues.sumPlayer()),Avatar.AvatarName);
         //repeat the game?
         EndOfGame(endvalues.sumFriend(),endvalues.sumPlayer());
         if(UserYes.getAsBoolean())Start();
@@ -99,11 +93,10 @@ public class DiceGame {
     private static final BiPredicate<Integer,Integer> gaming = (Integer sumPlayer, Integer sumFriend) -> sumPlayer >= 21 || sumFriend >= 21;
 
     private static final BiFunction<Integer,Integer,String> WinnerEvaluation = (Integer sumPlayer, Integer sumFriend) -> { 
-        System.out.printf("TEST IN WINNER EVALUATION: %d %d",sumPlayer,sumFriend);
-        if ((sumPlayer <22 && sumPlayer > sumFriend)||((21-sumPlayer > 21-sumFriend)&&(sumPlayer != 21 || sumFriend != 21)))    return"\nPlayer wins!!!🎉";
-        else if (sumFriend <22 && sumFriend > sumPlayer ||((21-sumPlayer < 21-sumFriend)&&(sumPlayer != 21 || sumFriend != 21)))return "\nDino wins🎉🎉🎉";
-        else if (sumFriend==sumPlayer)                                                                                          return "Tie🤷‍♂️";
-        else                                                                                                                    return "Don't do gambling, kids!";
+        if ((sumPlayer <= 21 && (sumPlayer > sumFriend || sumFriend>21)))    return"\nPlayer wins!!!🎉";
+        else if (sumFriend <= 21 && (sumFriend > sumPlayer || sumPlayer>21)) return "\n%s wins🎉🎉🎉";
+        else if (sumFriend==sumPlayer)                                       return "\n Tie🤷";
+        else                                                                 return "\nDon't do gambling, kids!";
         };
 
     private static final BooleanSupplier UserYes = () -> Character.toLowerCase(input.next().charAt(0))=='y';
@@ -115,7 +108,8 @@ public class DiceGame {
     //texts
     private static final String instructions = """
             ----------------------------
-            |Players in turn aim to score 21, or as near as possible to it!
+            !!!Milly's edition of dice game!!!
+            |Players aim to score 21, or as near as possible to it!
             |So player can throw the dice as many times as desired and adding up the numbers thrown.
             |A player who totals over 21 is bust and is out of the game!!!!
             |The player whose total is nearest 21, wins the game.

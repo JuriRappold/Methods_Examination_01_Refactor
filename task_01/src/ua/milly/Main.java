@@ -1,6 +1,4 @@
 package ua.milly;
-
-import ua.milly.games.GameRock;
 import ua.milly.utils.Menu;
 
 public class Main {

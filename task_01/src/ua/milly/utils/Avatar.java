@@ -52,7 +52,7 @@ public class Avatar {
              }
 
         }
-         System.out.printf("You chose to play with %s!", AvatarName);
+         System.out.printf("You chose to play with %s!\n", AvatarName);
      }
 
 

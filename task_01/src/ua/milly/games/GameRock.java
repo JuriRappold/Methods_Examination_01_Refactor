@@ -35,7 +35,7 @@ public class GameRock {
         case "1" -> "r";
         case "2" -> "s";
         case "3" -> "p";
-        case null, default -> "bad";
+        default -> "bad";
     };
 
 
